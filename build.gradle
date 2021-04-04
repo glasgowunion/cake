@@ -29,6 +29,10 @@ spotless {
         target createSpotlessTarget(['**/*.yaml', '**/*.json'])
         prettier()
     }
+    format 'javascript', {
+        target createSpotlessTarget(['packages/**/*.js', 'packages/**/*.ts'])
+        prettier().configFile('.prettierrc.json')
+    }
 }
 
 check.dependsOn 'spotlessApply'

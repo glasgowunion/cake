@@ -23,3 +23,19 @@ installs waracle eslint config for typescript for typescript projects
 #### 6. Install Comitizen
 ```yarn add -D commitizen cz-conventional-changelog```
 
+#### 7. Install Jest
+```yarn add -D jest ts-jest @types/jest```
+
+#### 8. Setup Waracle Eslint settings
+```
+yarn add -D @typescript-eslint/eslint-plugin@latest
+yarn add -D @typescript-eslint/parser
+yarn add -D eslint-plugin-jsx-a11y@latest
+yarn add -D eslint-plugin-react@latest
+yarn add -D eslint-plugin-import@latest
+yarn add -D eslint-config-prettier
+yarn add -D eslint-plugin-jest
+yarn add -D prettier
+yarn add -D eslint-plugin-sonarjs
+```
+

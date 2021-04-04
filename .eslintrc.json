@@ -1,3 +1,4 @@
 {
-    "extends": ["waracle/typescript"]
+  "extends": ["waracle/typescript", "waracle/sonarcloud"],
+  "ignorePatterns": ["**/build/**", "**/lib/**", "**/tests/**"]
 }
