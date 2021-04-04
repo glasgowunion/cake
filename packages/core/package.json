@@ -1,14 +1,14 @@
 {
-  "name": "core",
-  "version": "0.0.1",
+  "name": "@cake/core",
+  "version": "0.0.0",
   "description": "core package for cake entities and domain types",
   "author": "Jamie Laux <jamie@bleeppurple.com>",
   "homepage": "https://github.com/glasgowunion/cake#readme",
   "license": "MIT",
-  "main": "lib/core.js",
+  "main": "lib/index.js",
   "directories": {
     "lib": "lib",
-    "test": "__tests__"
+    "test": "tests"
   },
   "files": [
     "lib"
@@ -25,5 +25,11 @@
   },
   "bugs": {
     "url": "https://github.com/glasgowunion/cake/issues"
+  },
+  "dependencies": {
+    "joi": "^17.4.0"
+  },
+  "devDependencies": {
+    "@cake/mocks": "0.0.0"
   }
 }
