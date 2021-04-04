@@ -1,0 +1,29 @@
+{
+  "name": "@cake/mocks",
+  "version": "0.0.0",
+  "description": "mock package for mocks of core types",
+  "author": "Jamie Laux <jamie@bleeppurple.com>",
+  "homepage": "https://github.com/glasgowunion/cake#readme",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "tests"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.yarnpkg.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/glasgowunion/cake.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/glasgowunion/cake/issues"
+  }
+}
