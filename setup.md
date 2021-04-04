@@ -12,5 +12,14 @@ setups up lerna using npx (so we can run this bootstrap process once with instal
 installs types script for use in project
 ```yarn add -D typescript @types/node```
 
+#### 4. Install Waracle eslint config
+installs waracle eslint config for typescript for typescript projects
+```yarn add -D eslint-config-waracle```
+```yarn add -D eslint```
 
+#### 5. Install Husky for GH commits
+```npx husky-init && yarn```
+
+#### 6. Install Comitizen
+```yarn add -D commitizen cz-conventional-changelog```
 
