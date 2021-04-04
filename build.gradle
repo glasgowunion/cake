@@ -1,0 +1,42 @@
+plugins {
+  id 'com.diffplug.spotless' version '5.11.1'
+  id "org.sonarqube" version "3.1.1"
+}
+
+repositories {
+  mavenCentral()
+}
+
+def createSpotlessTarget = { pattern ->
+  def excludes = [
+        '.gradle',
+        'node_modules',
+        'build',
+        'lib',
+    ]
+
+  return fileTree(dir: rootDir, include: pattern, exclude: excludes.collect { "**/${it }" })
+}
+
+spotless {
+    groovyGradle {
+        target createSpotlessTarget('**/*.gradle')
+    }
+    typescript {
+        target createSpotlessTarget('**/*.ts')
+    }
+    format 'styling', {
+        target createSpotlessTarget(['**/*.yaml', '**/*.json'])
+        prettier()
+    }
+}
+
+check.dependsOn 'spotlessApply'
+
+sonarqube {
+  properties {
+    property "sonar.projectKey", "glasgowunion_cake"
+    property "sonar.organization", "glasgowunion"
+    property "sonar.host.url", "https://sonarcloud.io"
+  }
+}
