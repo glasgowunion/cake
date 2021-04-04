@@ -23,7 +23,7 @@
     "typescript": "^4.2.3"
   },
   "scripts": {
-    "bootstrap": "yarn clean && yarn build:mocks && yarn lerna bootstrap",
+    "bootstrap": "yarn clean && yarn build:deps && yarn lerna bootstrap",
     "clean": "lerna clean",
     "build:deps": "yarn build:mocks",
     "build:core": "tsc -b ./packages/core/tsconfig.json",
