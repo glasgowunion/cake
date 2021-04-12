@@ -100,7 +100,7 @@ describe('Adaptor.DynamoDB.Responses.Respository.Responses > adaptorAllCakesDyna
   it('should should return an empty array when there are no items present', () => {
     const input: DynamoDB.DocumentClient.AttributeMap[] = [];
     const test = adaptorAllCakesDynamoDBResponseRepositoryResponse(input);
-    expect(test).toStrictEqual([]);
+    expect(test).toBeInstanceOf(EmptyRepositoryError);
   });
 
   it('should should return an cake array when there are cakes to return', () => {
