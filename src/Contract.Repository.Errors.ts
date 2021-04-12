@@ -9,4 +9,3 @@ export class NotFoundRepositoryError extends Error {}
  * returned when an there are no resources in the database
  */
 export class EmptyRepositoryError extends Error {}
-

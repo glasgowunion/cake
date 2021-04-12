@@ -2,7 +2,10 @@ import { DynamoDB } from 'aws-sdk';
 
 import { CakeEntity, NewCakeEntity } from './Core.Entity.Cake';
 
-import { EmptyRepositoryError, NotFoundRepositoryError } from './Contract.Repository.Errors';
+import {
+  EmptyRepositoryError,
+  NotFoundRepositoryError,
+} from './Contract.Repository.Errors';
 import {
   AllCakesRepositoryResponse,
   CreateCakeRepositoryResponse,
@@ -15,11 +18,11 @@ export type AdaptorAllCakesDynamoDBResponseRepositoryResponse = (
 ) => AllCakesRepositoryResponse;
 
 export type AdaptorDeleteCakeDBResponseRepositoryResponse = (
-  input: DynamoDB.DocumentClient.AttributeMap,
+  input: DynamoDB.DocumentClient.AttributeMap | undefined,
 ) => DeleteCakeRepositoryResponse;
 
 export type AdaptorGetCakeDBResponseRepositoryResponse = (
-  input: DynamoDB.DocumentClient.AttributeMap,
+  input: DynamoDB.DocumentClient.AttributeMap | undefined,
 ) => GetCakeRepositoryResponse;
 
 /**
@@ -29,7 +32,7 @@ export function adaptorAllCakesDynamoDBResponseRepositoryResponse(
   input: DynamoDB.DocumentClient.ItemList | undefined,
 ): AllCakesRepositoryResponse {
   if (input === undefined) {
-    return new EmptyRepositoryError("there are no cakes");
+    return new EmptyRepositoryError('there are no cakes');
   }
   return input.map(v => {
     return NewCakeEntity({
@@ -42,17 +45,13 @@ export function adaptorAllCakesDynamoDBResponseRepositoryResponse(
   });
 }
 
-// test for an empty object
-const isEmptyObject = (obj: any) =>
-  obj && Object.keys(obj).length === 0 && obj.constructor === Object;
-
 /**
  * make a create cake resitory response from a dynamodb response
  */
 export function adaptorDeleteCakeDBResponseRepositoryResponse(
-  input: DynamoDB.DocumentClient.AttributeMap,
+  input: DynamoDB.DocumentClient.AttributeMap | undefined,
 ): DeleteCakeRepositoryResponse {
-  if (isEmptyObject(input)) {
+  if (input === undefined) {
     return new NotFoundRepositoryError();
   }
   return NewCakeEntity({
@@ -68,9 +67,9 @@ export function adaptorDeleteCakeDBResponseRepositoryResponse(
  * make a get cake resitory response from a dynamodb response
  */
 export function adaptorGetCakeDBResponseRepositoryResponse(
-  input: DynamoDB.DocumentClient.AttributeMap,
+  input: DynamoDB.DocumentClient.AttributeMap | undefined,
 ): GetCakeRepositoryResponse {
-  if (isEmptyObject(input)) {
+  if (input === undefined) {
     return new NotFoundRepositoryError();
   }
   return NewCakeEntity({

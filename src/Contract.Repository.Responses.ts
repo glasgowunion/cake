@@ -1,5 +1,8 @@
 import { CakeEntity } from './Core.Entity.Cake';
-import { EmptyRepositoryError, NotFoundRepositoryError } from './Contract.Repository.Errors';
+import {
+  EmptyRepositoryError,
+  NotFoundRepositoryError,
+} from './Contract.Repository.Errors';
 
 /**
  * Response types for repository

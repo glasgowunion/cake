@@ -20,7 +20,10 @@ import {
 import { valid as dynamodbValid } from '../mocks/DynamoDB.Cake.Properties';
 
 import { DynamoDB } from 'aws-sdk';
-import { NotFoundRepositoryError } from '../src/Contract.Repository.Errors';
+import {
+  EmptyRepositoryError,
+  NotFoundRepositoryError,
+} from '../src/Contract.Repository.Errors';
 
 // Adaptor.API.Event.Repository.Parameters
 
@@ -112,7 +115,7 @@ describe('Adaptor.DynamoDB.Responses.Respository.Responses > adaptorAllCakesDyna
 
 describe('Adaptor.DynamoDB.Responses.Respository.Responses > adaptorDeleteCakeDBResponseRepositoryResponse', () => {
   it('should should return a not found error when there are no items present', () => {
-    const input: DynamoDB.DocumentClient.AttributeMap = {};
+    const input: any = undefined;
     const test = adaptorDeleteCakeDBResponseRepositoryResponse(input);
     expect(test).toBeInstanceOf(NotFoundRepositoryError);
   });
@@ -126,7 +129,7 @@ describe('Adaptor.DynamoDB.Responses.Respository.Responses > adaptorDeleteCakeDB
 
 describe('Adaptor.DynamoDB.Responses.Respository.Responses > adaptorGetCakeDBResponseRepositoryResponse', () => {
   it('should should return a not found error when there are no items present', () => {
-    const input: DynamoDB.DocumentClient.AttributeMap = {};
+    const input: any = undefined;
     const test = adaptorGetCakeDBResponseRepositoryResponse(input);
     expect(test).toBeInstanceOf(NotFoundRepositoryError);
   });
@@ -146,6 +149,11 @@ describe('Adaptor.Repository.Responses.API.Responses > allCakesToResponse', () =
     const test = allCakesToResponse(input);
     expect(test.statusCode).toEqual(200);
     expect(test.body).toEqual(JSON.stringify([valid, valid]));
+  });
+  it('should should return a 204 success apigateway response when repository is empty', () => {
+    const input = new EmptyRepositoryError();
+    const test = allCakesToResponse(input);
+    expect(test.statusCode).toEqual(204);
   });
 });
 
