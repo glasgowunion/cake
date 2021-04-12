@@ -40,7 +40,7 @@ check.dependsOn 'spotlessApply'
 sonarqube {
   properties {
     property "javascript.lcov.reportPaths", "./coverage/lcov.info"
-    property "sonar.exclusions","**/tests/*.js"
+    property "sonar.exclusions","**/tests/*.ts"
     property "sonar.host.url", "https://sonarcloud.io"
     property "sonar.language","js"
     property "sonar.organization", "glasgowunion"
