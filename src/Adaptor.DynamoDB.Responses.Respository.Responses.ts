@@ -14,21 +14,13 @@ export type AdaptorAllCakesDynamoDBResponseRepositoryResponse = (
   input: DynamoDB.DocumentClient.ItemList,
 ) => AllCakesRepositoryResponse;
 
-export type AdaptorCreateCakeDynamoDBResponseRepositoryResponse = (
-  input: DynamoDB.DocumentClient.ItemList,
-) => CreateCakeRepositoryResponse;
-
 export type AdaptorDeleteCakeDBResponseRepositoryResponse = (
-  input: DynamoDB.DocumentClient.ItemList,
+  input: DynamoDB.DocumentClient.AttributeMap,
 ) => DeleteCakeRepositoryResponse;
 
 export type AdaptorGetCakeDBResponseRepositoryResponse = (
   input: DynamoDB.DocumentClient.AttributeMap,
 ) => GetCakeRepositoryResponse;
-
-/**
- * Implementations
- */
 
 /**
  * make a all cakes resitory response from a dynamodb response
@@ -45,6 +37,21 @@ function adaptorAllCakesDynamoDBResponseRepositoryResponse(
       yumFactor: v.yumFactor,
     });
   });
+}
+
+/**
+ * make a create cake resitory response from a dynamodb response
+ */
+ function adaptorDeleteCakeDBResponseRepositoryResponse(
+  input: DynamoDB.DocumentClient.AttributeMap,
+): CreateCakeRepositoryResponse {
+    return NewCakeEntity({
+      comment: input.comment,
+      id: input.pk,
+      imageUrl: input.imageUrl,
+      name: input.name,
+      yumFactor: input.yumFactor,
+    });
 }
 
 /**

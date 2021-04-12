@@ -1,12 +1,12 @@
 import { DynamoDB } from 'aws-sdk';
-import { AdaptorAllCakesDynamoDBResponseRepositoryResponse } from './Adaptor.DynamoDB.Responses.Respository.Responses';
-import { AllCakesRepositoryQuery } from './Contract.Repository.Queries';
+import { AdaptorDeleteCakeDBResponseRepositoryResponse } from './Adaptor.DynamoDB.Responses.Respository.Responses';
+import { DeleteCakeRepositoryMutation } from './Contract.Repository.Mutations';
 
-export const NewAllCakesRepository = (
+export const NewDeleteCakeRepository = (
   table: string,
   db: DynamoDB.DocumentClient,
-  adaptor: AdaptorAllCakesDynamoDBResponseRepositoryResponse,
-): AllCakesRepositoryQuery => async () => {
-  const { Items } = await db.scan({ TableName: table }).promise();
-  return adaptor(Items);
+  adaptor: AdaptorDeleteCakeDBResponseRepositoryResponse,
+): DeleteCakeRepositoryMutation => async (id: number) => {
+  const {Attributes} = await db.delete({ TableName: table ,Key: {pk:id}}).promise();
+  return adaptor(Attributes);
 };
