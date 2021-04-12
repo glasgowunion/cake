@@ -1,4 +1,3 @@
-
 import { NewCakeEntity } from '../src/Core.Entity.Cake';
 import { handler } from '../src/Service.Lambda.DeleteCake';
 import { eventToID } from '../src/Adaptor.API.Event.Repository.Parameters';
