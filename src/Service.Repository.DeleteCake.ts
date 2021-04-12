@@ -8,7 +8,7 @@ export const NewDeleteCakeRepository = (
   adaptor: AdaptorDeleteCakeDBResponseRepositoryResponse,
 ): DeleteCakeRepositoryMutation => async (id: number) => {
   const { Attributes } = await db
-    .delete({ TableName: table, Key: { pk: id } })
+    .delete({ TableName: table, Key: { pk: id }, ReturnValues: 'ALL_OLD' })
     .promise();
   return adaptor(Attributes);
 };

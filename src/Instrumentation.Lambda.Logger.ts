@@ -1,3 +1,2 @@
 // interface LambdaHandler {
-//     event
 // }

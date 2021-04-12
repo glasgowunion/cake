@@ -25,7 +25,7 @@ export type CreateCakeLambdaMutation = (
 ) => Promise<LambdaAnyResponse>;
 
 /**
- * represents a handler to get a single cake by id
+ * represents a handler to delete a single cake by id
  * returns a aws api gateway proxy return type
  */
 export type DeleteCakeLambdaMutation = (
