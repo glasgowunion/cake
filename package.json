@@ -62,6 +62,6 @@
     "cloc": "cloc src/",
     "build": "tsc -b ./tsconfig.json",
     "lint:fix": "eslint -c .eslintrc.json --fix",
-    "test": "jest . --config=./jest.config.js --coverage --passWithNoTests"
+    "test": "jest . --config=./jest.config.js --passWithNoTests"
   }
 }
