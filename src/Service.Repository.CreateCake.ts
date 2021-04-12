@@ -12,7 +12,13 @@ export const NewCreateCakesRepository = (
   table: string,
   db: DynamoDB.DocumentClient,
 ): CreateCakeRepositoryMutation => async (cake: UnsavedCakeEntity) => {
-  const item = { ...cake, id: gen() };
+  // generate id
+  const id = gen();
+
+  // TODO: we should really have an adaptor here
+  const item = { ...cake, pk: id };
+
   await db.put({ TableName: table, Item: item }).promise();
-  return NewCakeEntity(item);
+
+  return NewCakeEntity({ ...cake, id });
 };
