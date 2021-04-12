@@ -6,7 +6,7 @@ import { DeleteCakeLambdaMutation } from './Contract.Lambda.Mutations';
  * @param toRepository - adaptor - event to repository parameter
  * @param repository - service repository
  * @param toAPI adaptor - repository response to repository apigw response
- * @returns 
+ * @returns
  */
 export const handler: DeleteCakeLambdaMutation = async (
   event,

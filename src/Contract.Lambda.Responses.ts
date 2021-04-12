@@ -23,7 +23,7 @@ export interface LambdaNotFoundResponse {
 }
 
 /**
- * represents a successful apigw response 
+ * represents a successful apigw response
  */
 export interface LambdaSuccessResponse {
   statusCode: 200;
