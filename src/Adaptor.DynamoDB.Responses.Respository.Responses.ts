@@ -2,7 +2,7 @@ import { DynamoDB } from 'aws-sdk';
 
 import { CakeEntity, NewCakeEntity } from './Core.Entity.Cake';
 
-import { NotFoundRepositoryError } from './Contract.Repository.Errors';
+import { EmptyRepositoryError, NotFoundRepositoryError } from './Contract.Repository.Errors';
 import {
   AllCakesRepositoryResponse,
   CreateCakeRepositoryResponse,
@@ -11,7 +11,7 @@ import {
 } from './Contract.Repository.Responses';
 
 export type AdaptorAllCakesDynamoDBResponseRepositoryResponse = (
-  input: DynamoDB.DocumentClient.ItemList,
+  input: DynamoDB.DocumentClient.ItemList | undefined,
 ) => AllCakesRepositoryResponse;
 
 export type AdaptorDeleteCakeDBResponseRepositoryResponse = (
@@ -26,8 +26,11 @@ export type AdaptorGetCakeDBResponseRepositoryResponse = (
  * make a all cakes resitory response from a dynamodb response
  */
 export function adaptorAllCakesDynamoDBResponseRepositoryResponse(
-  input: DynamoDB.DocumentClient.ItemList,
+  input: DynamoDB.DocumentClient.ItemList | undefined,
 ): AllCakesRepositoryResponse {
+  if (input === undefined) {
+    return new EmptyRepositoryError("there are no cakes");
+  }
   return input.map(v => {
     return NewCakeEntity({
       comment: v.comment,
@@ -40,7 +43,8 @@ export function adaptorAllCakesDynamoDBResponseRepositoryResponse(
 }
 
 // test for an empty object
-const isEmptyObject = (obj:any) => obj && Object.keys(obj).length === 0 && obj.constructor === Object
+const isEmptyObject = (obj: any) =>
+  obj && Object.keys(obj).length === 0 && obj.constructor === Object;
 
 /**
  * make a create cake resitory response from a dynamodb response

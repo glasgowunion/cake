@@ -1,5 +1,5 @@
 import { LambdaAnyResponse } from './Contract.Lambda.Responses';
-import { NotFoundRepositoryError } from './Contract.Repository.Errors';
+import { EmptyRepositoryError,NotFoundRepositoryError } from './Contract.Repository.Errors';
 import {
   AllCakesRepositoryResponse,
   CreateCakeRepositoryResponse,
@@ -44,6 +44,22 @@ function cakeToResponse(input: any): LambdaAnyResponse {
   };
 }
 
+/* make a api gateway proxy response from a generic cakes repository response
+*/
+function cakesToResponse(input: any): LambdaAnyResponse {
+ if (input instanceof EmptyRepositoryError) {
+   return {
+     statusCode: 204,
+     body: JSON.stringify(input.message),
+   };
+ }
+
+ return {
+   statusCode: 200,
+   body: JSON.stringify(input),
+ };
+}
+
 /**
  * make a successful reponse with a cake
  */
@@ -78,7 +94,7 @@ export function deleteCakeToResponse(
 export function allCakesToResponse(
   input: AllCakesRepositoryResponse,
 ): LambdaAnyResponse {
-  return successfulCakeResponse(input);
+  return cakeToResponse(input);
 }
 
 /**

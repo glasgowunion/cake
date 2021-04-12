@@ -17,3 +17,8 @@ export interface LambdaSuccessResponse {
   statusCode: 200;
   body: string;
 }
+
+export interface LambdaSuccessButResourceEmpty {
+  statusCode: 204;
+  body: string;
+}
