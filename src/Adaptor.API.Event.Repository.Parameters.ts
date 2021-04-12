@@ -25,7 +25,9 @@ export type AdaptorAPIEventRepositoryIDParameter = (
  * given an input from a api gateway proxy event
  * return an cake
  */
-export function eventToCake(event: APIGatewayProxyEvent): UnsavedCakeEntity {
+export function adaptorAPIEventRepositoryCakeParameter(
+  event: APIGatewayProxyEvent,
+): UnsavedCakeEntity {
   const { body } = event;
 
   if (body === null) {

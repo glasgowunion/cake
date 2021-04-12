@@ -1,5 +1,5 @@
 import {
-  eventToCake,
+  adaptorAPIEventRepositoryCakeParameter,
   adaptorAPIEventRepositoryIDParameter,
 } from '../src/Adaptor.API.Event.Repository.Parameters';
 import {
@@ -27,24 +27,24 @@ import {
 
 // Adaptor.API.Event.Repository.Parameters
 
-describe('Adaptor.API.Event.Repository.Parameters > eventToCake', () => {
+describe('Adaptor.API.Event.Repository.Parameters > adaptorAPIEventRepositoryCakeParameter', () => {
   it('should throw an error when specification is not met - invoked without an cake object', () => {
     const event: any = { body: JSON.stringify(invalidDefaultWithoutID) };
-    const test = () => eventToCake(event);
+    const test = () => adaptorAPIEventRepositoryCakeParameter(event);
 
     expect(test).toThrow();
   });
 
   it('should throw an error when body is null', () => {
     const event: any = { body: null };
-    const test = () => eventToCake(event);
+    const test = () => adaptorAPIEventRepositoryCakeParameter(event);
 
     expect(test).toThrow();
   });
 
   it('should convert to a valid set of parameters when event body is a valid set of cake properties', () => {
     const event: any = { body: JSON.stringify(validWithoutID) };
-    const test = () => eventToCake(event);
+    const test = () => adaptorAPIEventRepositoryCakeParameter(event);
 
     expect(test()).toEqual(validWithoutID);
   });
