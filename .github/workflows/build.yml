@@ -29,8 +29,10 @@ jobs:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
           restore-keys: ${{ runner.os }}-gradle
-      - name: Test Core
-        run: yarn && yarn bootstrap && yarn test:core
+      - name: Yarn install
+        run: yarn install
+      - name: Test Library
+        run: yarn test
       - name: Upload to sonarqube
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,10 +1,8 @@
-.gradle/
-node_modules/
-lerna-debug.log
-npm-debug.log
-packages/*/lib
-# Ignore Gradle project-specific cache directory
 .gradle
-
-# Ignore Gradle build output directory
+.gradle/
 build
+coverage
+lerna-debug.log
+lib
+node_modules/
+npm-debug.log
