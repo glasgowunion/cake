@@ -1,0 +1,67 @@
+service: cake
+frameworkVersion: '2'
+
+provider:
+  lambdaHashingVersion: "20201221"
+  name: aws
+  region: ${opt:region, 'eu-west-1'}
+  runtime: nodejs14.x
+  stage: ${opt:stage, 'stage'}
+  environment:
+    TableName: "Cakes"
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:*
+      Resource:
+        - arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/*
+
+plugins:
+  - serverless-plugin-typescript 
+  - serverless-offline
+
+functions:
+  all:
+    handler: src/LambdaAllCakes.handler
+    events:
+      - http:
+          path: cakes/
+          method: get
+          cors: true
+  create:
+    handler: src/LambdaCreateCake.handler
+    events:
+      - http:
+          path: cakes
+          method: post
+          cors: true
+  delete:
+    handler: src/LambdaDeleteCake.handler
+    events:
+      - http:
+          path: cakes/{id}
+          method: delete
+          cors: true
+  get:
+    handler: src/LambdaGetCake.handler
+    events:
+      - http:
+          path: cakes/{id}
+          method: get
+          cors: true
+
+resources:
+  Resources:
+    DataTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: pk
+            AttributeType: N
+        KeySchema:
+          - AttributeName: pk
+            KeyType: HASH
+        TableName: Cakes
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1

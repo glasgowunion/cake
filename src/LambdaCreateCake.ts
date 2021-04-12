@@ -7,13 +7,18 @@ import { handler as service } from './Service.Lambda.CreateCake';
 import { NewCreateCakesRepository } from './Service.Repository.CreateCake';
 
 // config from env vars
-const table = process.env.TableName;
+const config = () => {
+  if (!process.env.TableName) {
+    throw new Error('please setup your env variables');
+  }
+  return process.env.TableName;
+};
 
 // init dynamodb client
 const client = new DynamoDB.DocumentClient();
 
 // create a repository for use in the handler
-const repo = NewCreateCakesRepository(process.env.TableName, client);
+const repo = NewCreateCakesRepository(config(), client);
 
 // exported Lambda handler
 export const handler = async (

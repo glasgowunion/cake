@@ -8,14 +8,19 @@ import { handler as service } from './Service.Lambda.DeleteCake';
 import { NewDeleteCakeRepository } from './Service.Repository.DeleteCake';
 
 // config from env vars
-const table = process.env.TableName;
+const config = () => {
+  if (!process.env.TableName) {
+    throw new Error('please setup your env variables');
+  }
+  return process.env.TableName;
+};
 
 // init dynamodb client
 const client = new DynamoDB.DocumentClient();
 
 // create a repository for use in the handler
 const repo = NewDeleteCakeRepository(
-  process.env.TableName,
+  config(),
   client,
   adaptorDeleteCakeDBResponseRepositoryResponse,
 );
