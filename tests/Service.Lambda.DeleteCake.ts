@@ -1,6 +1,6 @@
 import { NewCakeEntity } from '../src/Core.Entity.Cake';
 import { handler } from '../src/Service.Lambda.DeleteCake';
-import { eventToID } from '../src/Adaptor.API.Event.Repository.Parameters';
+import { adaptorAPIEventRepositoryIDParameter } from '../src/Adaptor.API.Event.Repository.Parameters';
 import { deleteCakeToResponse } from '../src/Adaptor.Repository.Responses.API.Responses';
 import { valid } from '../mocks/Core.Cake.Properties';
 import { NotFoundRepositoryError } from '../src/Contract.Repository.Errors';
@@ -14,7 +14,7 @@ describe('Service.Lambda.DeleteCake > Success', () => {
     // test
     const resp = await handler(
       eventWithID,
-      eventToID,
+      adaptorAPIEventRepositoryIDParameter,
       repository,
       deleteCakeToResponse,
     );
@@ -33,7 +33,7 @@ describe('Service.Lambda.GetCake > Not Found', () => {
     // test
     const resp = await handler(
       eventWithID,
-      eventToID,
+      adaptorAPIEventRepositoryIDParameter,
       repository,
       deleteCakeToResponse,
     );

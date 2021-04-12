@@ -76,7 +76,7 @@ function successfulCakeResponse(input: any): LambdaAnyResponse {
 /**
  * make a api gateway proxy response from a get repository response
  */
-export function getCakeToResponse(
+export function adaptorGetCakeRepositoryResponseAPIResponse(
   input: GetCakeRepositoryResponse,
 ): LambdaAnyResponse {
   return cakeToResponse(input);
