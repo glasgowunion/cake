@@ -2,7 +2,10 @@ import { DynamoDB } from 'aws-sdk';
 
 import { CakeEntity, NewCakeEntity } from './Core.Entity.Cake';
 
-import { NotFoundRepositoryError } from './Contract.Repository.Errors';
+import {
+  EmptyRepositoryError,
+  NotFoundRepositoryError,
+} from './Contract.Repository.Errors';
 import {
   AllCakesRepositoryResponse,
   CreateCakeRepositoryResponse,
@@ -11,23 +14,26 @@ import {
 } from './Contract.Repository.Responses';
 
 export type AdaptorAllCakesDynamoDBResponseRepositoryResponse = (
-  input: DynamoDB.DocumentClient.ItemList,
+  input: DynamoDB.DocumentClient.ItemList | undefined,
 ) => AllCakesRepositoryResponse;
 
 export type AdaptorDeleteCakeDBResponseRepositoryResponse = (
-  input: DynamoDB.DocumentClient.AttributeMap,
+  input: DynamoDB.DocumentClient.AttributeMap | undefined,
 ) => DeleteCakeRepositoryResponse;
 
 export type AdaptorGetCakeDBResponseRepositoryResponse = (
-  input: DynamoDB.DocumentClient.AttributeMap,
+  input: DynamoDB.DocumentClient.AttributeMap | undefined,
 ) => GetCakeRepositoryResponse;
 
 /**
  * make a all cakes resitory response from a dynamodb response
  */
-function adaptorAllCakesDynamoDBResponseRepositoryResponse(
-  input: DynamoDB.DocumentClient.ItemList,
+export function adaptorAllCakesDynamoDBResponseRepositoryResponse(
+  input: DynamoDB.DocumentClient.ItemList | undefined,
 ): AllCakesRepositoryResponse {
+  if (input === undefined) {
+    return new EmptyRepositoryError('there are no cakes');
+  }
   return input.map(v => {
     return NewCakeEntity({
       comment: v.comment,
@@ -42,32 +48,35 @@ function adaptorAllCakesDynamoDBResponseRepositoryResponse(
 /**
  * make a create cake resitory response from a dynamodb response
  */
- function adaptorDeleteCakeDBResponseRepositoryResponse(
-  input: DynamoDB.DocumentClient.AttributeMap,
-): CreateCakeRepositoryResponse {
-    return NewCakeEntity({
-      comment: input.comment,
-      id: input.pk,
-      imageUrl: input.imageUrl,
-      name: input.name,
-      yumFactor: input.yumFactor,
-    });
+export function adaptorDeleteCakeDBResponseRepositoryResponse(
+  input: DynamoDB.DocumentClient.AttributeMap | undefined,
+): DeleteCakeRepositoryResponse {
+  if (input === undefined) {
+    return new NotFoundRepositoryError();
+  }
+  return NewCakeEntity({
+    comment: input.comment,
+    id: input.pk,
+    imageUrl: input.imageUrl,
+    name: input.name,
+    yumFactor: input.yumFactor,
+  });
 }
 
 /**
  * make a get cake resitory response from a dynamodb response
  */
- function adaptorGetCakeDBResponseRepositoryResponse(
-  input: DynamoDB.DocumentClient.AttributeMap,
+export function adaptorGetCakeDBResponseRepositoryResponse(
+  input: DynamoDB.DocumentClient.AttributeMap | undefined,
 ): GetCakeRepositoryResponse {
-    if (input.entries.length === 0) {
-      return new NotFoundRepositoryError();
-    }
-    return NewCakeEntity({
-      comment: input.comment,
-      id: input.pk,
-      imageUrl: input.imageUrl,
-      name: input.name,
-      yumFactor: input.yumFactor,
-    });
+  if (input === undefined) {
+    return new NotFoundRepositoryError();
+  }
+  return NewCakeEntity({
+    comment: input.comment,
+    id: input.pk,
+    imageUrl: input.imageUrl,
+    name: input.name,
+    yumFactor: input.yumFactor,
+  });
 }

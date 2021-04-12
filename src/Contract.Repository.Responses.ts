@@ -1,5 +1,8 @@
 import { CakeEntity } from './Core.Entity.Cake';
-import { NotFoundRepositoryError } from './Contract.Repository.Errors';
+import {
+  EmptyRepositoryError,
+  NotFoundRepositoryError,
+} from './Contract.Repository.Errors';
 
 /**
  * Response types for repository
@@ -7,7 +10,7 @@ import { NotFoundRepositoryError } from './Contract.Repository.Errors';
  * designed for use in adaptors
  */
 
-export type AllCakesRepositoryResponse = CakeEntity[];
+export type AllCakesRepositoryResponse = CakeEntity[] | EmptyRepositoryError;
 export type CreateCakeRepositoryResponse = CakeEntity;
 export type DeleteCakeRepositoryResponse = CakeEntity | NotFoundRepositoryError;
 export type GetCakeRepositoryResponse = CakeEntity | NotFoundRepositoryError;

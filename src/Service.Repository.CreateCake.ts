@@ -12,7 +12,7 @@ export const NewCreateCakesRepository = (
   table: string,
   db: DynamoDB.DocumentClient,
 ): CreateCakeRepositoryMutation => async (cake: UnsavedCakeEntity) => {
-  const item = {...cake, id:gen()};
-  await db.put({ TableName: table ,Item: item}).promise();
+  const item = { ...cake, id: gen() };
+  await db.put({ TableName: table, Item: item }).promise();
   return NewCakeEntity(item);
 };
