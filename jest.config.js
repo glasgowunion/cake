@@ -1,5 +1,11 @@
 module.exports = {
+  collectCoverage: true,
   preset: 'ts-jest',
-  testMatch: ['**/tests/**/*.[jt]s?(x)'],
   testEnvironment: 'node',
+  testMatch: ['**/tests/**/*.[jt]s?(x)'],
+  testResultsProcessor: "jest-sonar-reporter",
+  coveragePathIgnorePatterns: [
+    "/node_modules/",
+    "/test/"
+  ]
 };

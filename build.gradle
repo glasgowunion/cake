@@ -39,8 +39,15 @@ check.dependsOn 'spotlessApply'
 
 sonarqube {
   properties {
-    property "sonar.projectKey", "glasgowunion_cake"
-    property "sonar.organization", "glasgowunion"
+    property "javascript.lcov.reportPaths", "./coverage/lcov.info"
+    property "sonar.exclusions","**/tests/*.js"
     property "sonar.host.url", "https://sonarcloud.io"
+    property "sonar.language","js"
+    property "sonar.organization", "glasgowunion"
+    property "sonar.projectKey", "glasgowunion_cake"
+    property "sonar.sourceEncoding","UTF-8"
+    property "sonar.sources","."
+    property "sonar.tests","./tests"
+    property "testExecutionReportPaths", "./test-report.xml"
   }
 }
