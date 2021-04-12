@@ -8,3 +8,8 @@
 - refactor mocks module, as these are mean to be plain old objects
   - it makes little sense to use typescript
   - instead just use plain old javascript objects
+
+### Todo
+
+- add caching of yarn packages to github workflow
+

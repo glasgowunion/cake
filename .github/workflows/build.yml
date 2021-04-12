@@ -29,6 +29,8 @@ jobs:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
           restore-keys: ${{ runner.os }}-gradle
+      - name: Yarn install
+        run: yarn
       - name: Test Library
         run: yarn test
       - name: Upload to sonarqube
