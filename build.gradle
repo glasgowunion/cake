@@ -30,7 +30,7 @@ spotless {
         prettier()
     }
     format 'javascript', {
-        target createSpotlessTarget(['packages/**/*.js', 'packages/**/*.ts'])
+        target createSpotlessTarget(['**/*.js', '**/*.ts'])
         prettier().configFile('.prettierrc.json')
     }
 }
