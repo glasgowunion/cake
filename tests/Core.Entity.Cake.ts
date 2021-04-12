@@ -20,7 +20,7 @@ describe('@core > creating a invalid cake', () => {
 
   it('should throw an error when specification is not met - invoked with an zero id', () => {
     const newCake = () => NewCakeEntity(invalidZeroID);
-    expect(newCake).toThrowError(`"id" must be greater than or equal to 1`);
+    expect(newCake).toThrowError(`"id" must be a positive number`);
   });
 });
 
