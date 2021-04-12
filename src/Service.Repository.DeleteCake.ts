@@ -7,6 +7,8 @@ export const NewDeleteCakeRepository = (
   db: DynamoDB.DocumentClient,
   adaptor: AdaptorDeleteCakeDBResponseRepositoryResponse,
 ): DeleteCakeRepositoryMutation => async (id: number) => {
-  const {Attributes} = await db.delete({ TableName: table ,Key: {pk:id}}).promise();
+  const { Attributes } = await db
+    .delete({ TableName: table, Key: { pk: id } })
+    .promise();
   return adaptor(Attributes);
 };

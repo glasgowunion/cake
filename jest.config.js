@@ -3,9 +3,6 @@ module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
   testMatch: ['**/tests/**/*.[jt]s?(x)'],
-  testResultsProcessor: "jest-sonar-reporter",
-  coveragePathIgnorePatterns: [
-    "/node_modules/",
-    "/test/"
-  ]
+  testResultsProcessor: 'jest-sonar-reporter',
+  coveragePathIgnorePatterns: ['/node_modules/', '/test/'],
 };

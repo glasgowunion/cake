@@ -7,6 +7,8 @@ export const NewGetCakeRepository = (
   db: DynamoDB.DocumentClient,
   adaptor: AdaptorGetCakeDBResponseRepositoryResponse,
 ): GetCakeRepositoryQuery => async (id: number) => {
-  const { Item } = await db.get({ TableName: table, Key: { pk: id } }).promise();
+  const { Item } = await db
+    .get({ TableName: table, Key: { pk: id } })
+    .promise();
   return adaptor(Item);
 };

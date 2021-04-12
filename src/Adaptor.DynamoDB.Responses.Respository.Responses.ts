@@ -42,32 +42,32 @@ function adaptorAllCakesDynamoDBResponseRepositoryResponse(
 /**
  * make a create cake resitory response from a dynamodb response
  */
- function adaptorDeleteCakeDBResponseRepositoryResponse(
+function adaptorDeleteCakeDBResponseRepositoryResponse(
   input: DynamoDB.DocumentClient.AttributeMap,
 ): CreateCakeRepositoryResponse {
-    return NewCakeEntity({
-      comment: input.comment,
-      id: input.pk,
-      imageUrl: input.imageUrl,
-      name: input.name,
-      yumFactor: input.yumFactor,
-    });
+  return NewCakeEntity({
+    comment: input.comment,
+    id: input.pk,
+    imageUrl: input.imageUrl,
+    name: input.name,
+    yumFactor: input.yumFactor,
+  });
 }
 
 /**
  * make a get cake resitory response from a dynamodb response
  */
- function adaptorGetCakeDBResponseRepositoryResponse(
+function adaptorGetCakeDBResponseRepositoryResponse(
   input: DynamoDB.DocumentClient.AttributeMap,
 ): GetCakeRepositoryResponse {
-    if (input.entries.length === 0) {
-      return new NotFoundRepositoryError();
-    }
-    return NewCakeEntity({
-      comment: input.comment,
-      id: input.pk,
-      imageUrl: input.imageUrl,
-      name: input.name,
-      yumFactor: input.yumFactor,
-    });
+  if (input.entries.length === 0) {
+    return new NotFoundRepositoryError();
+  }
+  return NewCakeEntity({
+    comment: input.comment,
+    id: input.pk,
+    imageUrl: input.imageUrl,
+    name: input.name,
+    yumFactor: input.yumFactor,
+  });
 }
