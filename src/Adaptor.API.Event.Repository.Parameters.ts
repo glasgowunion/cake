@@ -30,7 +30,12 @@ export type AdaptorAPIEventRepositoryIDParameter = (
  */
 export function eventToCake(event: APIGatewayProxyEvent): UnsavedCakeEntity {
   const { body } = event;
-  const cake = JSON.parse(body);
+
+  if (body === null) {
+    throw new Error("exception: not expecting body to be empty")
+  }
+
+  const cake = JSON.parse(body as string);
 
   return NewUnsavedCakePropties(cake);
 }
@@ -41,6 +46,11 @@ export function eventToCake(event: APIGatewayProxyEvent): UnsavedCakeEntity {
  * return an cake id
  */
 export function eventToID(input: APIGatewayProxyEvent): number {
+
+  if (input.pathParameters === null) {
+    throw new Error("exception: not expecting body path parameters to be empty")
+  }
+
   const { id } = input.pathParameters;
-  return Number(id);
+  return Number(id as string);
 }

@@ -1,11 +1,11 @@
 import { NewCakeEntity, NewUnsavedCakePropties } from '../src/Core.Entity.Cake';
-const {
+import {
   invalidDefault,
   invalidDefaultWithoutID,
   invalidZeroID,
   valid,
   validWithoutID,
-} = require('../mocks/Core.Cake.Properties');
+}from '../mocks/Core.Cake.Properties';
 
 describe('@core > creating a invalid cake', () => {
   it('should throw an error when specification is not met - invoked without an cake object', () => {
