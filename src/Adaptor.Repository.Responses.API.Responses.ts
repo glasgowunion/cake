@@ -10,25 +10,33 @@ import {
   GetCakeRepositoryResponse,
 } from './Contract.Repository.Responses';
 
+/**
+ * convert all cakes repository response into a apigw api response
+ */
 export type AdaptorAllCakesRepositoryResponseAPIResponse = (
   input: AllCakesRepositoryResponse,
 ) => LambdaAnyResponse;
 
+/**
+ * convert create cake repository response into a apigw api response
+ */
 export type AdaptorCreateCakeRepositoryResponseAPIResponse = (
   input: CreateCakeRepositoryResponse,
 ) => LambdaAnyResponse;
 
+/**
+ * convert delete repository response into a apigw api response
+ */
 export type AdaptorDeleteCakeRepositoryResponseAPIResponse = (
   input: DeleteCakeRepositoryResponse,
 ) => LambdaAnyResponse;
 
+/**
+ * convert get repository response into a apigw api response
+ */
 export type AdaptorGetCakeRepositoryResponseAPIResponse = (
   input: GetCakeRepositoryResponse,
 ) => LambdaAnyResponse;
-
-/**
- * Implementations
- */
 
 /**
  * make a api gateway proxy response from a generic cake repository response

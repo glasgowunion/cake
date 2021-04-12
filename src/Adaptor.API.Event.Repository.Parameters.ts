@@ -3,6 +3,10 @@ import { NewUnsavedCakePropties, UnsavedCakeEntity } from './Core.Entity.Cake';
 import { CakeIDSchema } from './Core.Schema.Cake';
 
 /**
+ * Convert API Gateway event into repository parameers
+ */
+
+/**
  * converts api gateway to a cake entity
  */
 export type AdaptorAPIEventRepositoryCakeParameter = (
@@ -15,10 +19,6 @@ export type AdaptorAPIEventRepositoryCakeParameter = (
 export type AdaptorAPIEventRepositoryIDParameter = (
   input: APIGatewayProxyEvent,
 ) => number;
-
-/**
- * Implementations
- */
 
 /**
  * make a cake from an api gateway proxy event

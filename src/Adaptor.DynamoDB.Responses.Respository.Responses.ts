@@ -1,7 +1,6 @@
 import { DynamoDB } from 'aws-sdk';
 
-import { CakeEntity, NewCakeEntity } from './Core.Entity.Cake';
-
+import { NewCakeEntity } from './Core.Entity.Cake';
 import {
   EmptyRepositoryError,
   NotFoundRepositoryError,
@@ -12,6 +11,10 @@ import {
   DeleteCakeRepositoryResponse,
   GetCakeRepositoryResponse,
 } from './Contract.Repository.Responses';
+
+/**
+ * Convert DynamoDB responses into generic repository responses
+ */
 
 export type AdaptorAllCakesDynamoDBResponseRepositoryResponse = (
   input: DynamoDB.DocumentClient.ItemList | undefined,
