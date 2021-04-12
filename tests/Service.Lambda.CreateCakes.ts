@@ -1,7 +1,7 @@
 import { NewCakeEntity } from '../src/Core.Entity.Cake';
 import { handler } from '../src/Service.Lambda.CreateCake';
-import { eventToCake } from '../src/Adaptor.API.Event.Repository.Parameters';
-import { createCakeToResponse } from '../src/Adaptor.Repository.Responses.API.Responses';
+import { adaptorAPIEventRepositoryCakeParameter } from '../src/Adaptor.API.Event.Repository.Parameters';
+import { adaptorCreateCakeRepositoryResponseAPIResponse } from '../src/Adaptor.Repository.Responses.API.Responses';
 import { valid, validWithoutID } from '../mocks/Core.Cake.Properties';
 
 describe('Service.Lambda.CreateCakes > Success', () => {
@@ -15,9 +15,9 @@ describe('Service.Lambda.CreateCakes > Success', () => {
     // test
     const resp = await handler(
       eventWithCake,
-      eventToCake,
+      adaptorAPIEventRepositoryCakeParameter,
       repository,
-      createCakeToResponse,
+      adaptorCreateCakeRepositoryResponseAPIResponse,
     );
     expect(resp.statusCode).toBe(200);
     expect(resp.body).toBe(JSON.stringify(valid));

@@ -1,7 +1,7 @@
 import { NewCakeEntity } from '../src/Core.Entity.Cake';
 import { handler } from '../src/Service.Lambda.GetCake';
-import { eventToID } from '../src/Adaptor.API.Event.Repository.Parameters';
-import { getCakeToResponse } from '../src/Adaptor.Repository.Responses.API.Responses';
+import { adaptorAPIEventRepositoryIDParameter } from '../src/Adaptor.API.Event.Repository.Parameters';
+import { adaptorGetCakeRepositoryResponseAPIResponse } from '../src/Adaptor.Repository.Responses.API.Responses';
 import { valid } from '../mocks/Core.Cake.Properties';
 import { NotFoundRepositoryError } from '../src/Contract.Repository.Errors';
 
@@ -14,9 +14,9 @@ describe('Service.Lambda.GetCake > Success', () => {
     // test
     const resp = await handler(
       eventWithID,
-      eventToID,
+      adaptorAPIEventRepositoryIDParameter,
       repository,
-      getCakeToResponse,
+      adaptorGetCakeRepositoryResponseAPIResponse,
     );
     expect(resp.statusCode).toBe(200);
     expect(resp.body).toBe(JSON.stringify(valid));
@@ -33,9 +33,9 @@ describe('Service.Lambda.GetCake > Not Found', () => {
     // test
     const resp = await handler(
       eventWithID,
-      eventToID,
+      adaptorAPIEventRepositoryIDParameter,
       repository,
-      getCakeToResponse,
+      adaptorGetCakeRepositoryResponseAPIResponse,
     );
     expect(resp.statusCode).toBe(404);
   });

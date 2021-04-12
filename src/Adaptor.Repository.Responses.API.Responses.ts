@@ -76,7 +76,7 @@ function successfulCakeResponse(input: any): LambdaAnyResponse {
 /**
  * make a api gateway proxy response from a get repository response
  */
-export function getCakeToResponse(
+export function adaptorGetCakeRepositoryResponseAPIResponse(
   input: GetCakeRepositoryResponse,
 ): LambdaAnyResponse {
   return cakeToResponse(input);
@@ -85,7 +85,7 @@ export function getCakeToResponse(
 /**
  * make a api gateway proxy response to delete cake repository response
  */
-export function deleteCakeToResponse(
+export function adaptorDeleteCakeRepositoryResponseAPIResponse(
   input: DeleteCakeRepositoryResponse,
 ): LambdaAnyResponse {
   return cakeToResponse(input);
@@ -94,7 +94,7 @@ export function deleteCakeToResponse(
 /**
  * make a api gateway proxy response to delete cake repository response
  */
-export function allCakesToResponse(
+export function adaptorAllCakesRepositoryResponseAPIResponse(
   input: AllCakesRepositoryResponse,
 ): LambdaAnyResponse {
   return cakesToResponse(input);
@@ -103,7 +103,7 @@ export function allCakesToResponse(
 /**
  * make a api gateway proxy response to delete cake repository response
  */
-export function createCakeToResponse(
+export function adaptorCreateCakeRepositoryResponseAPIResponse(
   input: CreateCakeRepositoryResponse,
 ): LambdaAnyResponse {
   return successfulCakeResponse(input);

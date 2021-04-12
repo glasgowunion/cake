@@ -1,6 +1,6 @@
 import { NewCakeEntity } from '../src/Core.Entity.Cake';
 import { handler } from '../src/Service.Lambda.AllCakes';
-import { allCakesToResponse } from '../src/Adaptor.Repository.Responses.API.Responses';
+import { adaptorAllCakesRepositoryResponseAPIResponse } from '../src/Adaptor.Repository.Responses.API.Responses';
 import { valid } from '../mocks/Core.Cake.Properties';
 
 describe('Service.Lambda.AllCakes > Success', () => {
@@ -10,7 +10,11 @@ describe('Service.Lambda.AllCakes > Success', () => {
     const repository = async () => [NewCakeEntity(valid), NewCakeEntity(valid)];
 
     // test
-    const resp = await handler(eventWithID, repository, allCakesToResponse);
+    const resp = await handler(
+      eventWithID,
+      repository,
+      adaptorAllCakesRepositoryResponseAPIResponse,
+    );
     expect(resp.statusCode).toBe(200);
     expect(resp.body).toBe(JSON.stringify([valid, valid]));
   });
