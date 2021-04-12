@@ -1,9 +1,6 @@
 import { APIGatewayProxyEvent } from 'aws-lambda';
 import { NewUnsavedCakePropties, UnsavedCakeEntity } from './Core.Entity.Cake';
-
-/**
- * Types
- */
+import { CakeIDSchema } from './Core.Schema.Cake';
 
 /**
  * converts api gateway to a cake entity
@@ -46,12 +43,20 @@ export function eventToCake(event: APIGatewayProxyEvent): UnsavedCakeEntity {
  * return an cake id
  */
 export function eventToID(input: APIGatewayProxyEvent): number {
+
   if (input.pathParameters === null) {
     throw new Error(
       'exception: not expecting body path parameters to be empty',
     );
+  }  
+
+  const { error } = CakeIDSchema.validate(input.pathParameters);
+
+  if (error) {
+    throw error;
   }
 
   const { id } = input.pathParameters;
+
   return Number(id as string);
 }
