@@ -43,12 +43,11 @@ export function eventToCake(event: APIGatewayProxyEvent): UnsavedCakeEntity {
  * return an cake id
  */
 export function eventToID(input: APIGatewayProxyEvent): number {
-
   if (input.pathParameters === null) {
     throw new Error(
       'exception: not expecting body path parameters to be empty',
     );
-  }  
+  }
 
   const { error } = CakeIDSchema.validate(input.pathParameters);
 

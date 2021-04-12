@@ -19,9 +19,8 @@ import {
 } from '../mocks/Core.Cake.Properties';
 import { valid as dynamodbValid } from '../mocks/DynamoDB.Cake.Properties';
 
-import {DynamoDB} from 'aws-sdk';
+import { DynamoDB } from 'aws-sdk';
 import { NotFoundRepositoryError } from '../src/Contract.Repository.Errors';
-
 
 // Adaptor.API.Event.Repository.Parameters
 
@@ -49,7 +48,6 @@ describe('Adaptor.API.Event.Repository.Parameters > eventToCake', () => {
 });
 
 describe('Adaptor.API.Event.Repository.Parameters > eventToID', () => {
-
   it('should throw an error when pathParameters are null', () => {
     const event: any = { pathParameters: null };
     const test = () => eventToID(event);
@@ -86,7 +84,7 @@ describe('Adaptor.API.Event.Repository.Parameters > eventToID', () => {
   });
 
   it('should convert to a valid set of parameters when event params id is a string id (that can be converted to a number)', () => {
-    const event: any = { pathParameters: { id: "1" } };
+    const event: any = { pathParameters: { id: '1' } };
     const test = () => eventToID(event);
 
     expect(test()).toEqual(1);
@@ -96,96 +94,87 @@ describe('Adaptor.API.Event.Repository.Parameters > eventToID', () => {
 // Adaptor.DynamoDB.Responses.Respository.Responses
 
 describe('Adaptor.DynamoDB.Responses.Respository.Responses > adaptorAllCakesDynamoDBResponseRepositoryResponse', () => {
-
   it('should should return an empty array when there are no items present', () => {
-    const input:DynamoDB.DocumentClient.AttributeMap[] = []
+    const input: DynamoDB.DocumentClient.AttributeMap[] = [];
     const test = adaptorAllCakesDynamoDBResponseRepositoryResponse(input);
     expect(test).toStrictEqual([]);
   });
 
   it('should should return an cake array when there are cakes to return', () => {
-    const input:DynamoDB.DocumentClient.AttributeMap[] = [dynamodbValid,dynamodbValid]
+    const input: DynamoDB.DocumentClient.AttributeMap[] = [
+      dynamodbValid,
+      dynamodbValid,
+    ];
     const test = adaptorAllCakesDynamoDBResponseRepositoryResponse(input);
-    expect(test).toStrictEqual([valid,valid]);
+    expect(test).toStrictEqual([valid, valid]);
   });
-
 });
 
 describe('Adaptor.DynamoDB.Responses.Respository.Responses > adaptorDeleteCakeDBResponseRepositoryResponse', () => {
-
   it('should should return a not found error when there are no items present', () => {
-    const input:DynamoDB.DocumentClient.AttributeMap = {}
+    const input: DynamoDB.DocumentClient.AttributeMap = {};
     const test = adaptorDeleteCakeDBResponseRepositoryResponse(input);
     expect(test).toBeInstanceOf(NotFoundRepositoryError);
   });
 
   it('should should return an cake when there is cake to matching that id in dynamodb', () => {
-    const input:DynamoDB.DocumentClient.AttributeMap = dynamodbValid;
+    const input: DynamoDB.DocumentClient.AttributeMap = dynamodbValid;
     const test = adaptorDeleteCakeDBResponseRepositoryResponse(input);
     expect(test).toStrictEqual(valid);
   });
-
 });
 
 describe('Adaptor.DynamoDB.Responses.Respository.Responses > adaptorGetCakeDBResponseRepositoryResponse', () => {
-
   it('should should return a not found error when there are no items present', () => {
-    const input:DynamoDB.DocumentClient.AttributeMap = {}
+    const input: DynamoDB.DocumentClient.AttributeMap = {};
     const test = adaptorGetCakeDBResponseRepositoryResponse(input);
     expect(test).toBeInstanceOf(NotFoundRepositoryError);
   });
 
   it('should should return an cake when there is cake to matching that id in dynamodb', () => {
-    const input:DynamoDB.DocumentClient.AttributeMap = dynamodbValid;
+    const input: DynamoDB.DocumentClient.AttributeMap = dynamodbValid;
     const test = adaptorGetCakeDBResponseRepositoryResponse(input);
     expect(test).toStrictEqual(valid);
   });
-
 });
 
 // Adaptor.Repository.Responses.API.Responses
 
 describe('Adaptor.Repository.Responses.API.Responses > allCakesToResponse', () => {
-
   it('should should return an cake array with a 200 success apigateway response', () => {
-    const input = [valid,valid]
+    const input = [valid, valid];
     const test = allCakesToResponse(input);
     expect(test.statusCode).toEqual(200);
-    expect(test.body).toEqual(JSON.stringify([valid,valid]));
+    expect(test.body).toEqual(JSON.stringify([valid, valid]));
   });
-
 });
 
 describe('Adaptor.Repository.Responses.API.Responses > deleteCakeToResponse', () => {
-
   it('should should return an cake with a 200 success apigateway response', () => {
-    const input = valid
+    const input = valid;
     const test = deleteCakeToResponse(input);
     expect(test.statusCode).toEqual(200);
     expect(test.body).toEqual(JSON.stringify(valid));
   });
 
   it('should should return an error with a 404 when is revieves not found dynamodb error', () => {
-    const input = new NotFoundRepositoryError
+    const input = new NotFoundRepositoryError();
     const test = deleteCakeToResponse(input);
     expect(test.statusCode).toEqual(404);
   });
-
 });
 
 describe('Adaptor.Repository.Responses.API.Responses > getCakeToResponse', () => {
-
   it('should should return an cake with a 200 success apigateway response', () => {
-    const input = valid
+    const input = valid;
     const test = getCakeToResponse(input);
     expect(test.statusCode).toEqual(200);
     expect(test.body).toEqual(JSON.stringify(valid));
   });
 
   it('should should return an error with a 404 when is revieves not found dynamodb error', () => {
-    const input = new NotFoundRepositoryError
+    const input = new NotFoundRepositoryError();
     const test = getCakeToResponse(input);
     expect(test.statusCode).toEqual(404);
   });
-
 });
