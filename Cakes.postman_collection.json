@@ -10,7 +10,21 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": null
+				"url": {
+					"raw": "https://finsurucq3.execute-api.eu-west-1.amazonaws.com/stage/cakes",
+					"protocol": "https",
+					"host": [
+						"finsurucq3",
+						"execute-api",
+						"eu-west-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"stage",
+						"cakes"
+					]
+				}
 			},
 			"response": []
 		},
@@ -19,25 +33,85 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": null
+				"url": {
+					"raw": "https://finsurucq3.execute-api.eu-west-1.amazonaws.com/stage/cakes/1618290095886",
+					"protocol": "https",
+					"host": [
+						"finsurucq3",
+						"execute-api",
+						"eu-west-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"stage",
+						"cakes",
+						"1618290095886"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
 			},
 			"response": []
 		},
 		{
 			"name": "Delete Cake",
 			"request": {
-				"method": "GET",
+				"method": "DELETE",
 				"header": [],
-				"url": null
+				"url": {
+					"raw": "https://finsurucq3.execute-api.eu-west-1.amazonaws.com/stage/cakes/1618290095886",
+					"protocol": "https",
+					"host": [
+						"finsurucq3",
+						"execute-api",
+						"eu-west-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"stage",
+						"cakes",
+						"1618290095886"
+					]
+				}
 			},
 			"response": []
 		},
 		{
 			"name": "Create Cake",
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [],
-				"url": null
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"mock cake\",\n  \"comment\": \"this is a delicious mock cake\",\n  \"imageUrl\": \"https://images.unsplash.com/photo-1578985545062-69928b1d9587\",\n  \"yumFactor\": 5\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://finsurucq3.execute-api.eu-west-1.amazonaws.com/stage/cakes",
+					"protocol": "https",
+					"host": [
+						"finsurucq3",
+						"execute-api",
+						"eu-west-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"stage",
+						"cakes"
+					]
+				}
 			},
 			"response": []
 		}
