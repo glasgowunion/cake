@@ -25,7 +25,7 @@ export type AdaptorGetCakeDBResponseRepositoryResponse = (
 /**
  * make a all cakes resitory response from a dynamodb response
  */
-function adaptorAllCakesDynamoDBResponseRepositoryResponse(
+export function adaptorAllCakesDynamoDBResponseRepositoryResponse(
   input: DynamoDB.DocumentClient.ItemList,
 ): AllCakesRepositoryResponse {
   return input.map(v => {
@@ -39,12 +39,18 @@ function adaptorAllCakesDynamoDBResponseRepositoryResponse(
   });
 }
 
+// test for an empty object
+const isEmptyObject = (obj:any) => obj && Object.keys(obj).length === 0 && obj.constructor === Object
+
 /**
  * make a create cake resitory response from a dynamodb response
  */
-function adaptorDeleteCakeDBResponseRepositoryResponse(
+export function adaptorDeleteCakeDBResponseRepositoryResponse(
   input: DynamoDB.DocumentClient.AttributeMap,
-): CreateCakeRepositoryResponse {
+): DeleteCakeRepositoryResponse {
+  if (isEmptyObject(input)) {
+    return new NotFoundRepositoryError();
+  }
   return NewCakeEntity({
     comment: input.comment,
     id: input.pk,
@@ -57,10 +63,10 @@ function adaptorDeleteCakeDBResponseRepositoryResponse(
 /**
  * make a get cake resitory response from a dynamodb response
  */
-function adaptorGetCakeDBResponseRepositoryResponse(
+export function adaptorGetCakeDBResponseRepositoryResponse(
   input: DynamoDB.DocumentClient.AttributeMap,
 ): GetCakeRepositoryResponse {
-  if (input.entries.length === 0) {
+  if (isEmptyObject(input)) {
     return new NotFoundRepositoryError();
   }
   return NewCakeEntity({
