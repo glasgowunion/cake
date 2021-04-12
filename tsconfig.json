@@ -1,20 +1,10 @@
 {
+  "extends": "@tsconfig/node14/tsconfig.json",
   "compilerOptions": {
-    "baseUrl": ".",
-    "declaration": true,
-    "esModuleInterop": true,
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "noImplicitAny": true,
-    "outDir": "dist",
     "sourceMap": true,
-    "target": "es6",
-    "compilerOptions": {
-      "outDir": "./lib"
-    },
-    "include": ["./src"],
-    "paths": {
-      "*": ["node_modules/*", "src/types/*"]
-    }
-  }
+    "moduleResolution": "node",
+    "outDir": "./lib",
+    "rootDir": "./src"
+  },
+  "include": ["src/**/*.ts", "src/**/*.js"]
 }
