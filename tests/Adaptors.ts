@@ -8,7 +8,7 @@ import {
   adaptorGetCakeDBResponseRepositoryResponse,
 } from '../src/Adaptor.DynamoDB.Responses.Respository.Responses';
 import {
-  allCakesToResponse,
+  adaptorAllCakesRepositoryResponseAPIResponse,
   adaptorDeleteCakeRepositoryResponseAPIResponse,
   adaptorGetCakeRepositoryResponseAPIResponse,
 } from '../src/Adaptor.Repository.Responses.API.Responses';
@@ -143,16 +143,16 @@ describe('Adaptor.DynamoDB.Responses.Respository.Responses > adaptorGetCakeDBRes
 
 // Adaptor.Repository.Responses.API.Responses
 
-describe('Adaptor.Repository.Responses.API.Responses > allCakesToResponse', () => {
+describe('Adaptor.Repository.Responses.API.Responses > adaptorAllCakesRepositoryResponseAPIResponse', () => {
   it('should should return an cake array with a 200 success apigateway response', () => {
     const input = [valid, valid];
-    const test = allCakesToResponse(input);
+    const test = adaptorAllCakesRepositoryResponseAPIResponse(input);
     expect(test.statusCode).toEqual(200);
     expect(test.body).toEqual(JSON.stringify([valid, valid]));
   });
   it('should should return a 204 success apigateway response when repository is empty', () => {
     const input = new EmptyRepositoryError();
-    const test = allCakesToResponse(input);
+    const test = adaptorAllCakesRepositoryResponseAPIResponse(input);
     expect(test.statusCode).toEqual(204);
   });
 });
