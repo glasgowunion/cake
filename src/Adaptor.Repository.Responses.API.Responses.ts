@@ -85,7 +85,7 @@ export function adaptorGetCakeRepositoryResponseAPIResponse(
 /**
  * make a api gateway proxy response to delete cake repository response
  */
-export function deleteCakeToResponse(
+export function adaptorDeleteCakeRepositoryResponseAPIResponse(
   input: DeleteCakeRepositoryResponse,
 ): LambdaAnyResponse {
   return cakeToResponse(input);

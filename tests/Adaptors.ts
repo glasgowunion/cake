@@ -9,7 +9,7 @@ import {
 } from '../src/Adaptor.DynamoDB.Responses.Respository.Responses';
 import {
   allCakesToResponse,
-  deleteCakeToResponse,
+  adaptorDeleteCakeRepositoryResponseAPIResponse,
   adaptorGetCakeRepositoryResponseAPIResponse,
 } from '../src/Adaptor.Repository.Responses.API.Responses';
 import {
@@ -157,17 +157,17 @@ describe('Adaptor.Repository.Responses.API.Responses > allCakesToResponse', () =
   });
 });
 
-describe('Adaptor.Repository.Responses.API.Responses > deleteCakeToResponse', () => {
+describe('Adaptor.Repository.Responses.API.Responses > adaptorDeleteCakeRepositoryResponseAPIResponse', () => {
   it('should should return an cake with a 200 success apigateway response', () => {
     const input = valid;
-    const test = deleteCakeToResponse(input);
+    const test = adaptorDeleteCakeRepositoryResponseAPIResponse(input);
     expect(test.statusCode).toEqual(200);
     expect(test.body).toEqual(JSON.stringify(valid));
   });
 
   it('should should return an error with a 404 when is revieves not found dynamodb error', () => {
     const input = new NotFoundRepositoryError();
-    const test = deleteCakeToResponse(input);
+    const test = adaptorDeleteCakeRepositoryResponseAPIResponse(input);
     expect(test.statusCode).toEqual(404);
   });
 });
