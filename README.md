@@ -74,14 +74,14 @@ the view the outstanding items in the roadmap
 
 A lot of time has been spent on contracts and adaptors
 If the project grows we should be able to use the patterns in these
-files, to help use extend the API.
+files, to help us extend the API.
 
 #### Layout
 
 - Adaptors - adaptors are responsible for converting data between the services
 - Core - our core data structures and representations of our domain
 - Contracts - types and interfaces which our services depend on
-- Services - services represent our 'real world' services as we move into our infrastructure layers
+- Services - services represent our 'real world' services as we move into our infrastructure layers, services are built from other services and our inner domain types
   - Lambda - represents our lambda functions
   - Repository - represents our persistance layer our dynamo db repository
 - Lambdas - our deployments, where our lambdas get bootstrapped
